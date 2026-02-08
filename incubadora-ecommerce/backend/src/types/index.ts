@@ -104,3 +104,26 @@ export interface CreateOrderRequest {
 export interface OrderWithItems extends Order {
   items: OrderItem[];
 }
+
+// Cart
+export interface CartItem {
+  id: number;
+  user_id: number;
+  product_id: number;
+  quantity: number;
+  created_at: Date;
+}
+
+export interface CartItemWithProduct extends CartItem {
+  product: Product;
+  subtotal: number;
+}
+
+export interface AddToCartRequest {
+  product_id: number;
+  quantity: number;
+}
+
+export interface UpdateCartRequest {
+  quantity: number;
+}
