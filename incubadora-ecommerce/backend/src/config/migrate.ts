@@ -22,6 +22,38 @@ const runMigrations = async () => {
       CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
     `);
 
+    // Create orders table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS orders (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id),
+        total_amount DECIMAL(10, 2) NOT NULL,
+        status VARCHAR(20) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'paid', 'shipped', 'delivered')),
+        customer_email VARCHAR(255) NOT NULL,
+        shipping_address TEXT NOT NULL,
+        payment_status BOOLEAN DEFAULT FALSE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // Create order_items table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS order_items (
+        id SERIAL PRIMARY KEY,
+        order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+        product_id INTEGER NOT NULL,
+        quantity INTEGER NOT NULL,
+        unit_price DECIMAL(10, 2) NOT NULL,
+        subtotal DECIMAL(10, 2) NOT NULL
+      );
+    `);
+
+    // Create index on orders user_id
+    await pool.query(`
+      CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
+    `);
+
     console.log('✅ Migrations completed successfully');
     process.exit(0);
   } catch (error) {
