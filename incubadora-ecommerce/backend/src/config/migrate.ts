@@ -22,6 +22,25 @@ const runMigrations = async () => {
       CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
     `);
 
+    // Create products table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS products (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        description TEXT,
+        price DECIMAL(10, 2) NOT NULL,
+        image_url VARCHAR(500),
+        stock INTEGER NOT NULL DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // Create index on product name for search
+    await pool.query(`
+      CREATE INDEX IF NOT EXISTS idx_products_name ON products(name);
+    `);
+
     // Create orders table
     await pool.query(`
       CREATE TABLE IF NOT EXISTS orders (
@@ -42,7 +61,7 @@ const runMigrations = async () => {
       CREATE TABLE IF NOT EXISTS order_items (
         id SERIAL PRIMARY KEY,
         order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
-        product_id INTEGER NOT NULL,
+        product_id INTEGER NOT NULL REFERENCES products(id),
         quantity INTEGER NOT NULL,
         unit_price DECIMAL(10, 2) NOT NULL,
         subtotal DECIMAL(10, 2) NOT NULL
