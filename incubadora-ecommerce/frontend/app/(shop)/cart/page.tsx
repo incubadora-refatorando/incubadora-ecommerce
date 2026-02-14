@@ -7,20 +7,18 @@ import { Button } from '@/shared/components/ui/button';
 import { useCartStore } from '@/features/cart/store';
 import { CartItem } from '@/features/cart/components/CartItem';
 import { CartSummary } from '@/features/cart/components/CartSummary';
+import { CheckoutModal } from '@/features/cart/components/CheckoutModal';
 
 export default function CartPage() {
   const { items, total, isLoading, fetchCart } = useCartStore();
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
 
   useEffect(() => {
     fetchCart();
   }, [fetchCart]);
 
   const handleCheckout = () => {
-    // TODO: Open checkout modal
-    setIsCheckingOut(true);
-    console.log('Checkout clicked - Modal will be implemented next');
-    setTimeout(() => setIsCheckingOut(false), 1000);
+    setIsCheckoutModalOpen(true);
   };
 
   if (isLoading && items.length === 0) {
@@ -93,11 +91,16 @@ export default function CartPage() {
             <CartSummary
               subtotal={total}
               onCheckout={handleCheckout}
-              isLoading={isCheckingOut}
             />
           </div>
         </div>
       </div>
+
+      {/* Checkout Modal */}
+      <CheckoutModal
+        isOpen={isCheckoutModalOpen}
+        onClose={() => setIsCheckoutModalOpen(false)}
+      />
     </div>
   );
 }
