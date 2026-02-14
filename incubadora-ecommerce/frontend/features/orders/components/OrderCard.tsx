@@ -29,7 +29,7 @@ export function OrderCard({ order }: OrderCardProps) {
       <div className="flex items-start justify-between mb-4">
         <div>
           <h3 className="text-lg font-semibold text-gray-dark">
-            Order #{order.id}
+            Pedido #{order.id}
           </h3>
           <p className="text-sm text-gray-medium mt-1">
             {formatDate(order.created_at)}
@@ -40,7 +40,7 @@ export function OrderCard({ order }: OrderCardProps) {
 
       <div className="border-t border-border pt-4 space-y-2">
         <div className="flex justify-between text-sm">
-          <span className="text-gray-medium">Total Amount</span>
+          <span className="text-gray-medium">Valor Total</span>
           <span className="font-semibold text-gray-dark">
             {formatPrice(order.total_amount)}
           </span>
@@ -54,7 +54,7 @@ export function OrderCard({ order }: OrderCardProps) {
       <div className="mt-4 pt-4 border-t border-border">
         <Link href={`/orders/${order.id}`}>
           <Button variant="outline" className="w-full">
-            View Details
+            Ver Detalhes
           </Button>
         </Link>
       </div>

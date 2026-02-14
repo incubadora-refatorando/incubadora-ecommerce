@@ -18,7 +18,7 @@ export default function ProductsPage() {
         const response = await apiClient.get<Product[]>('/products');
         setProducts(response.data);
       } catch (error) {
-        toast.error('Failed to load products');
+        toast.error('Erro ao carregar produtos');
       } finally {
         setIsLoading(false);
       }
@@ -38,7 +38,7 @@ export default function ProductsPage() {
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">All Products</h1>
+        <h1 className="text-3xl font-bold mb-8">Todos os Produtos</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
             <div key={i} className="h-96 bg-gray-light rounded-lg animate-pulse" />
@@ -52,18 +52,18 @@ export default function ProductsPage() {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-dark">
-          {searchQuery ? 'Search Results' : 'All Products'}
+          {searchQuery ? 'Resultados da Busca' : 'Todos os Produtos'}
         </h1>
         <p className="text-gray-medium mt-2">
-          {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
-          {searchQuery && ` for "${searchQuery}"`}
+          {filteredProducts.length} {filteredProducts.length === 1 ? 'produto' : 'produtos'}
+          {searchQuery && ` para "${searchQuery}"`}
         </p>
       </div>
 
       {filteredProducts.length === 0 ? (
         <div className="text-center py-16">
           <p className="text-gray-medium text-lg">
-            {searchQuery ? 'No products found matching your search.' : 'No products available.'}
+            {searchQuery ? 'Nenhum produto encontrado para sua busca.' : 'Nenhum produto disponível.'}
           </p>
         </div>
       ) : (

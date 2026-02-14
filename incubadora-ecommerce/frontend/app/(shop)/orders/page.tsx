@@ -17,7 +17,7 @@ export default function OrdersPage() {
         const response = await apiClient.get<Order[]>('/orders');
         setOrders(response.data);
       } catch (error) {
-        toast.error('Failed to load orders');
+        toast.error('Erro ao carregar pedidos');
       } finally {
         setIsLoading(false);
       }
@@ -30,7 +30,7 @@ export default function OrdersPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">My Orders</h1>
+          <h1 className="text-3xl font-bold mb-8">Meus Pedidos</h1>
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
               <div key={i} className="h-48 bg-gray-light rounded-lg animate-pulse" />
@@ -48,9 +48,9 @@ export default function OrdersPage() {
           <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-light flex items-center justify-center">
             <Package className="w-12 h-12 text-gray-medium" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-dark mb-3">No orders yet</h1>
+          <h1 className="text-2xl font-bold text-gray-dark mb-3">Nenhum pedido ainda</h1>
           <p className="text-gray-medium">
-            You haven't placed any orders yet.
+            Você ainda não realizou nenhum pedido.
           </p>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function OrdersPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-dark mb-8">My Orders</h1>
+        <h1 className="text-3xl font-bold text-gray-dark mb-8">Meus Pedidos</h1>
 
         <div className="space-y-4">
           {orders.map((order) => (

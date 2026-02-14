@@ -18,24 +18,24 @@ export function CartItem({ item }: CartItemProps) {
   const handleUpdateQuantity = async (newQuantity: number) => {
     if (newQuantity < 1) return;
     if (newQuantity > item.product.stock) {
-      toast.error(`Only ${item.product.stock} items available in stock`);
+      toast.error(`Apenas ${item.product.stock} unidades disponíveis em estoque`);
       return;
     }
 
     try {
       await updateQuantity(item.id, newQuantity);
-      toast.success('Cart updated');
+      toast.success('Carrinho atualizado');
     } catch (error) {
-      toast.error('Failed to update cart');
+      toast.error('Erro ao atualizar carrinho');
     }
   };
 
   const handleRemove = async () => {
     try {
       await removeItem(item.id);
-      toast.success('Item removed from cart');
+      toast.success('Item removido do carrinho');
     } catch (error) {
-      toast.error('Failed to remove item');
+      toast.error('Erro ao remover item');
     }
   };
 
@@ -59,7 +59,7 @@ export function CartItem({ item }: CartItemProps) {
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-medium text-xs">
-            No Image
+            Sem imagem
           </div>
         )}
       </Link>
@@ -106,7 +106,7 @@ export function CartItem({ item }: CartItemProps) {
 
           {item.product.stock < 5 && item.product.stock > 0 && (
             <span className="text-xs text-orange-500">
-              Only {item.product.stock} left
+              Apenas {item.product.stock} restantes
             </span>
           )}
         </div>
@@ -128,7 +128,7 @@ export function CartItem({ item }: CartItemProps) {
             {formatPrice(item.subtotal)}
           </div>
           <div className="text-xs text-gray-medium">
-            {formatPrice(item.product.price)} each
+            {formatPrice(item.product.price)} cada
           </div>
         </div>
       </div>

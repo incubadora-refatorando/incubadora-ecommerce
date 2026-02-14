@@ -27,7 +27,7 @@ export default function ProductPage() {
         const response = await apiClient.get<Product>(`/products/${params.id}`);
         setProduct(response.data);
       } catch (error) {
-        toast.error('Product not found');
+        toast.error('Produto não encontrado');
         router.push('/products');
       } finally {
         setIsLoading(false);
@@ -43,9 +43,9 @@ export default function ProductPage() {
     setIsAddingToCart(true);
     try {
       await addItem(product.id, quantity);
-      toast.success('Added to cart!');
+      toast.success('Adicionado ao carrinho!');
     } catch (error) {
-      toast.error('Failed to add to cart');
+      toast.error('Erro ao adicionar ao carrinho');
     } finally {
       setIsAddingToCart(false);
     }
@@ -92,7 +92,7 @@ export default function ProductPage() {
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back
+          Voltar
         </Button>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -108,7 +108,7 @@ export default function ProductPage() {
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-medium">
-                  No Image Available
+                  Imagem Indisponível
                 </div>
               )}
             </div>
@@ -131,13 +131,13 @@ export default function ProductPage() {
 
             {product.description && (
               <div>
-                <h3 className="font-semibold text-gray-dark mb-2">Description</h3>
+                <h3 className="font-semibold text-gray-dark mb-2">Descrição</h3>
                 <p className="text-gray-medium">{product.description}</p>
               </div>
             )}
 
             <div>
-              <h3 className="font-semibold text-gray-dark mb-3">Quantity</h3>
+              <h3 className="font-semibold text-gray-dark mb-3">Quantidade</h3>
               <div className="flex items-center gap-2">
                 <div className="flex items-center border border-border rounded-lg">
                   <Button
@@ -161,7 +161,7 @@ export default function ProductPage() {
                   </Button>
                 </div>
                 <span className="text-sm text-gray-medium">
-                  {product.stock} available
+                  {product.stock} disponíveis
                 </span>
               </div>
             </div>
@@ -173,7 +173,7 @@ export default function ProductPage() {
                 size="lg"
                 className="flex-1"
               >
-                Buy Now
+                Comprar Agora
               </Button>
               <Button
                 onClick={handleAddToCart}
@@ -183,12 +183,12 @@ export default function ProductPage() {
                 className="flex-1"
               >
                 <ShoppingCart className="w-4 h-4 mr-2" />
-                Add to Cart
+                Adicionar ao Carrinho
               </Button>
             </div>
 
             {product.stock === 0 && (
-              <p className="text-error font-medium">Out of Stock</p>
+              <p className="text-error font-medium">Fora de Estoque</p>
             )}
           </div>
         </div>

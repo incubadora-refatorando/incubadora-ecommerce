@@ -40,14 +40,14 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
         shipping_address: data.shippingAddress,
       });
 
-      toast.success('Order created successfully!');
+      toast.success('Pedido criado com sucesso!');
       clearCart();
       await fetchCart();
       reset();
       onClose();
       router.push(`/orders/${response.data.id}`);
     } catch (error) {
-      toast.error('Failed to create order');
+      toast.error('Erro ao criar pedido');
     } finally {
       setIsSubmitting(false);
     }
@@ -59,7 +59,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <Card className="w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-dark">Checkout</h2>
+          <h2 className="text-2xl font-bold text-gray-dark">Finalizar Compra</h2>
           <button
             onClick={onClose}
             className="text-gray-medium hover:text-gray-dark transition"
@@ -77,7 +77,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               id="customerEmail"
               type="email"
               {...register('customerEmail')}
-              placeholder="your@email.com"
+              placeholder="seu@email.com"
             />
             {errors.customerEmail && (
               <p className="text-sm text-error mt-1">{errors.customerEmail.message}</p>
@@ -86,12 +86,12 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
 
           <div>
             <label htmlFor="shippingAddress" className="block text-sm font-medium text-gray-dark mb-2">
-              Shipping Address
+              Endereço de Entrega
             </label>
             <Input
               id="shippingAddress"
               {...register('shippingAddress')}
-              placeholder="123 Main St, City, State, ZIP"
+              placeholder="Rua, Número, Bairro, Cidade, Estado, CEP"
             />
             {errors.shippingAddress && (
               <p className="text-sm text-error mt-1">{errors.shippingAddress.message}</p>
@@ -106,10 +106,10 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               disabled={isSubmitting}
               className="flex-1"
             >
-              Cancel
+              Cancelar
             </Button>
             <Button type="submit" disabled={isSubmitting} className="flex-1">
-              {isSubmitting ? 'Creating Order...' : 'Place Order'}
+              {isSubmitting ? 'Criando Pedido...' : 'Finalizar Pedido'}
             </Button>
           </div>
         </form>

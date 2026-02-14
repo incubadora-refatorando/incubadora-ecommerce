@@ -25,7 +25,7 @@ export default function CartPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
+          <h1 className="text-3xl font-bold mb-8">Carrinho de Compras</h1>
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
               <div key={i} className="h-32 bg-gray-light rounded-lg animate-pulse" />
@@ -43,14 +43,14 @@ export default function CartPage() {
           <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gray-light flex items-center justify-center">
             <ShoppingBag className="w-12 h-12 text-gray-medium" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-dark mb-3">Your cart is empty</h1>
+          <h1 className="text-2xl font-bold text-gray-dark mb-3">Seu carrinho está vazio</h1>
           <p className="text-gray-medium mb-6">
-            Looks like you haven't added any items to your cart yet.
+            Parece que você ainda não adicionou itens ao seu carrinho.
           </p>
           <Link href="/products">
             <Button size="lg">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Continue Shopping
+              Continuar Comprando
             </Button>
           </Link>
         </div>
@@ -63,9 +63,9 @@ export default function CartPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-dark mb-2">Shopping Cart</h1>
+          <h1 className="text-3xl font-bold text-gray-dark mb-2">Carrinho de Compras</h1>
           <p className="text-gray-medium">
-            {items.length} {items.length === 1 ? 'item' : 'items'} in your cart
+            {items.length} {items.length === 1 ? 'item' : 'itens'} no seu carrinho
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export default function CartPage() {
               className="inline-flex items-center gap-2 text-primary hover:underline mt-4"
             >
               <ArrowLeft className="w-4 h-4" />
-              Continue Shopping
+              Continuar Comprando
             </Link>
           </div>
 

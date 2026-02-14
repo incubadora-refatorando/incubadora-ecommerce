@@ -22,7 +22,7 @@ export default function OrderDetailPage() {
         const response = await apiClient.get<OrderWithItems>(`/orders/${params.id}`);
         setOrder(response.data);
       } catch (error) {
-        toast.error('Order not found');
+        toast.error('Pedido não encontrado');
         router.push('/orders');
       } finally {
         setIsLoading(false);
@@ -71,16 +71,16 @@ export default function OrderDetailPage() {
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Orders
+          Voltar aos Pedidos
         </Button>
 
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-dark">
-              Order #{order.id}
+              Pedido #{order.id}
             </h1>
             <p className="text-gray-medium mt-2">
-              Placed on {formatDate(order.created_at)}
+              Realizado em {formatDate(order.created_at)}
             </p>
           </div>
           <OrderStatus status={order.status} />
@@ -90,7 +90,7 @@ export default function OrderDetailPage() {
           {/* Order Details */}
           <Card className="md:col-span-2 p-6">
             <h2 className="text-xl font-semibold text-gray-dark mb-4">
-              Order Items
+              Itens do Pedido
             </h2>
 
             <div className="space-y-4">
@@ -102,10 +102,10 @@ export default function OrderDetailPage() {
                   >
                     <div>
                       <p className="font-medium text-gray-dark">
-                        Product ID: {item.product_id}
+                        Produto ID: {item.product_id}
                       </p>
                       <p className="text-sm text-gray-medium">
-                        Quantity: {item.quantity} × {formatPrice(item.unit_price)}
+                        Quantidade: {item.quantity} × {formatPrice(item.unit_price)}
                       </p>
                     </div>
                     <p className="font-semibold text-gray-dark">
@@ -114,7 +114,7 @@ export default function OrderDetailPage() {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-medium">No items in this order</p>
+                <p className="text-gray-medium">Nenhum item neste pedido</p>
               )}
             </div>
           </Card>
@@ -122,10 +122,10 @@ export default function OrderDetailPage() {
           {/* Order Summary */}
           <div className="space-y-6">
             <Card className="p-6">
-              <h3 className="font-semibold text-gray-dark mb-4">Summary</h3>
+              <h3 className="font-semibold text-gray-dark mb-4">Resumo</h3>
               <div className="space-y-3 border-b border-border pb-4">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-medium">Total Amount</span>
+                  <span className="text-gray-medium">Valor Total</span>
                   <span className="font-semibold text-gray-dark">
                     {formatPrice(order.total_amount)}
                   </span>
@@ -133,9 +133,9 @@ export default function OrderDetailPage() {
               </div>
               <div className="pt-4">
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-gray-medium">Payment Status</span>
+                  <span className="text-gray-medium">Status do Pagamento</span>
                   <span className={order.payment_status ? 'text-green-600' : 'text-orange-500'}>
-                    {order.payment_status ? 'Paid' : 'Pending'}
+                    {order.payment_status ? 'Pago' : 'Pendente'}
                   </span>
                 </div>
               </div>
@@ -143,7 +143,7 @@ export default function OrderDetailPage() {
 
             <Card className="p-6">
               <h3 className="font-semibold text-gray-dark mb-4">
-                Shipping Address
+                Endereço de Entrega
               </h3>
               <p className="text-sm text-gray-medium">
                 {order.shipping_address}
@@ -152,7 +152,7 @@ export default function OrderDetailPage() {
 
             <Card className="p-6">
               <h3 className="font-semibold text-gray-dark mb-4">
-                Customer Email
+                Email do Cliente
               </h3>
               <p className="text-sm text-gray-medium">
                 {order.customer_email}
