@@ -13,53 +13,53 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Shop</h4>
+            <h4 className="font-semibold mb-4">Loja</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/products" className="text-gray-light hover:text-white transition">
-                  All Products
+                  Todos os Produtos
                 </Link>
               </li>
               <li>
                 <Link href="/products" className="text-gray-light hover:text-white transition">
-                  Categories
+                  Categorias
                 </Link>
               </li>
               <li>
                 <Link href="/products" className="text-gray-light hover:text-white transition">
-                  Deals
+                  Ofertas
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Support</h4>
+            <h4 className="font-semibold mb-4">Suporte</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/orders" className="text-gray-light hover:text-white transition">
-                  My Orders
+                  Meus Pedidos
                 </Link>
               </li>
               <li>
                 <Link href="/cart" className="text-gray-light hover:text-white transition">
-                  Cart
+                  Carrinho
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Account</h4>
+            <h4 className="font-semibold mb-4">Conta</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/login" className="text-gray-light hover:text-white transition">
-                  Login
+                  Entrar
                 </Link>
               </li>
               <li>
                 <Link href="/register" className="text-gray-light hover:text-white transition">
-                  Register
+                  Cadastrar
                 </Link>
               </li>
             </ul>
@@ -67,7 +67,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-medium mt-8 pt-8 text-center text-sm text-gray-light">
-          <p>&copy; {new Date().getFullYear()} Shopcart. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Shopcart. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>

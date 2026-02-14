@@ -32,15 +32,15 @@ export function Header() {
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <span>🔥 Get 50% Off on Selected Items</span>
+            <span>🔥 50% de Desconto em Itens Selecionados</span>
             <Link href="/products" className="font-semibold hover:underline">
-              Shop Now
+              Compre Agora
             </Link>
           </div>
           <div className="flex items-center gap-2">
-            <span>Eng</span>
+            <span>PT</span>
             <span>|</span>
-            <span>Location</span>
+            <span>Brasil</span>
           </div>
         </div>
       </div>
@@ -57,16 +57,16 @@ export function Header() {
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/products" className="text-gray-dark hover:text-primary transition">
-              Categories
+              Categorias
             </Link>
             <Link href="/products" className="text-gray-dark hover:text-primary transition">
-              Deals
+              Ofertas
             </Link>
             <Link href="/products" className="text-gray-dark hover:text-primary transition">
-              What's New
+              Novidades
             </Link>
             <Link href="/products" className="text-gray-dark hover:text-primary transition">
-              Delivery
+              Entrega
             </Link>
           </nav>
 
@@ -74,7 +74,7 @@ export function Header() {
           <div className="flex-1 max-w-2xl relative">
             <Input
               type="text"
-              placeholder="Search Products..."
+              placeholder="Buscar Produtos..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pr-10"
@@ -89,7 +89,7 @@ export function Header() {
               className="flex items-center gap-2 text-gray-dark hover:text-primary transition"
             >
               <User className="w-5 h-5" />
-              <span className="hidden lg:inline">Account</span>
+              <span className="hidden lg:inline">Conta</span>
             </Link>
 
             <Link href="/cart" className="relative flex items-center gap-2">
@@ -99,7 +99,7 @@ export function Header() {
                   {itemCount}
                 </Badge>
               )}
-              <span className="hidden lg:inline text-gray-dark">Cart</span>
+              <span className="hidden lg:inline text-gray-dark">Carrinho</span>
             </Link>
           </div>
         </div>
