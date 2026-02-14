@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { CartItemWithProduct, CartResponse } from '@/lib/types';
-import apiClient from '@/lib/api/client';
+import { CartItemWithProduct, CartResponse } from '../types';
+import apiClient from '@/shared/lib/api-client';
 
 interface CartState {
   items: CartItemWithProduct[];

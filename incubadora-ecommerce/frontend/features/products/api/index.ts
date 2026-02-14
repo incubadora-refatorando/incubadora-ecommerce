@@ -1,5 +1,5 @@
-import apiClient from './client';
-import { Product } from '@/lib/types';
+import apiClient from '@/shared/lib/api-client';
+import { Product } from '../types';
 
 export const productsApi = {
   getAll: () => apiClient.get<Product[]>('/products'),

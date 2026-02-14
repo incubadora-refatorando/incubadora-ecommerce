@@ -1,5 +1,5 @@
-import apiClient from './client';
-import { Order, OrderWithItems, CreateOrderRequest } from '@/lib/types';
+import apiClient from '@/shared/lib/api-client';
+import { Order, OrderWithItems, CreateOrderRequest } from '../types';
 
 export const ordersApi = {
   create: (data: CreateOrderRequest) => apiClient.post<Order>('/orders', data),

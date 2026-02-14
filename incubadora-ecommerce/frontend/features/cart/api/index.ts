@@ -1,10 +1,10 @@
-import apiClient from './client';
+import apiClient from '@/shared/lib/api-client';
 import {
   CartResponse,
   CartItem,
   AddToCartRequest,
   UpdateCartRequest,
-} from '@/lib/types';
+} from '../types';
 
 export const cartApi = {
   get: () => apiClient.get<CartResponse>('/cart'),
