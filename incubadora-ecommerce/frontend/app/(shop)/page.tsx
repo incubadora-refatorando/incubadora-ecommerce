@@ -1,29 +1,27 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { Product } from "@/features/products/types";
-import { productsApi } from "@/features/products/api";
 import { ProductGrid } from "@/features/products/components/ProductGrid";
-import { toast } from "sonner";
 
-export default function HomePage() {
-	const [products, setProducts] = useState<Product[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
+async function getProducts(): Promise<Product[]> {
+	try {
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+		const response = await fetch(`${apiUrl}/products`, {
+			cache: 'no-store', // Sempre busca dados frescos
+		});
 
-	useEffect(() => {
-		const fetchProducts = async () => {
-			try {
-				const response = await productsApi.getAll();
-				setProducts(response.data.products);
-			} catch {
-				toast.error("Erro ao carregar produtos");
-			} finally {
-				setIsLoading(false);
-			}
-		};
+		if (!response.ok) {
+			throw new Error('Falha ao carregar produtos');
+		}
 
-		fetchProducts();
-	}, []);
+		const data = await response.json();
+		return data.products || [];
+	} catch (error) {
+		console.error('Erro ao buscar produtos:', error);
+		return [];
+	}
+}
+
+export default async function HomePage() {
+	const products = await getProducts();
 
 	return (
 		<div className="container mx-auto px-4 py-8">
@@ -51,7 +49,7 @@ export default function HomePage() {
 
 			<ProductGrid
 				products={products}
-				isLoading={isLoading}
+				isLoading={false}
 				columns={4}
 			/>
 		</div>

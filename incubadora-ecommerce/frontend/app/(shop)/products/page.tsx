@@ -1,91 +1,27 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { Product } from "@/features/products/types";
-import { ProductCard } from "@/features/products/components/ProductCard";
-import apiClient from "@/shared/lib/api-client";
-import { useUIStore } from "@/shared/store/uiStore";
-import { toast } from "sonner";
+import { ProductsClient } from "@/features/products/components/ProductsClient";
 
-export default function ProductsPage() {
-	const [products, setProducts] = useState<Product[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const { searchQuery } = useUIStore();
+async function getProducts(): Promise<Product[]> {
+	try {
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+		const response = await fetch(`${apiUrl}/products`, {
+			cache: 'no-store',
+		});
 
-	useEffect(() => {
-		const fetchProducts = async () => {
-			try {
-				const response = await apiClient.get<{ products: Product[] }>(
-					"/products",
-				);
-				setProducts(response.data.products);
-			} catch (error) {
-				toast.error("Erro ao carregar produtos");
-			} finally {
-				setIsLoading(false);
-			}
-		};
+		if (!response.ok) {
+			throw new Error('Falha ao carregar produtos');
+		}
 
-		fetchProducts();
-	}, []);
-
-	const filteredProducts = searchQuery
-		? products.filter(
-				(product) =>
-					product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-					product.description
-						?.toLowerCase()
-						.includes(searchQuery.toLowerCase()),
-			)
-		: products;
-
-	if (isLoading) {
-		return (
-			<div className="container mx-auto px-4 py-8">
-				<h1 className="text-3xl font-bold mb-8">Todos os Produtos</h1>
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-					{[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-						<div
-							key={i}
-							className="h-96 bg-gray-light rounded-lg animate-pulse"
-						/>
-					))}
-				</div>
-			</div>
-		);
+		const data = await response.json();
+		return data.products || [];
+	} catch (error) {
+		console.error('Erro ao buscar produtos:', error);
+		return [];
 	}
+}
 
-	return (
-		<div className="container mx-auto px-4 py-8">
-			<div className="mb-8">
-				<h1 className="text-3xl font-bold text-gray-dark">
-					{searchQuery ? "Resultados da Busca" : "Todos os Produtos"}
-				</h1>
-				<p className="text-gray-medium mt-2">
-					{filteredProducts.length}{" "}
-					{filteredProducts.length === 1 ? "produto" : "produtos"}
-					{searchQuery && ` para "${searchQuery}"`}
-				</p>
-			</div>
+export default async function ProductsPage() {
+	const products = await getProducts();
 
-			{filteredProducts.length === 0 ? (
-				<div className="text-center py-16">
-					<p className="text-gray-medium text-lg">
-						{searchQuery
-							? "Nenhum produto encontrado para sua busca."
-							: "Nenhum produto disponível."}
-					</p>
-				</div>
-			) : (
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-					{filteredProducts.map((product) => (
-						<ProductCard
-							key={product.id}
-							product={product}
-						/>
-					))}
-				</div>
-			)}
-		</div>
-	);
+	return <ProductsClient products={products} />;
 }
