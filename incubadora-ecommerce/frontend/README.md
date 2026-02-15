@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend - E-commerce
 
-## Getting Started
+Aplicação web de e-commerce desenvolvida com Next.js 16, React 19 e TypeScript.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** - Framework React com App Router
+- **React 19** - Biblioteca UI
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS v4** - Estilização
+- **shadcn/ui** - Componentes UI
+- **Zustand** - State management
+- **React Hook Form** + **Zod** - Forms e validação
+- **Axios** - Cliente HTTP
+
+## Features
+
+- ✅ Autenticação (Login/Registro)
+- ✅ Listagem e busca de produtos
+- ✅ Página de detalhes do produto
+- ✅ Carrinho de compras
+- ✅ Checkout com validação
+- ✅ Histórico de pedidos
+- ✅ Interface 100% em pt-BR
+- ✅ Middleware de proteção de rotas
+- ✅ Design responsivo
+
+## Instalação
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Instalar dependências
+npm install
+
+# Configurar variáveis de ambiente
+cp .env.example .env.local
+# Edite o .env.local com a URL da API backend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Executar
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Desenvolvimento
+npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Build para produção
+npm run build
 
-## Learn More
+# Rodar produção
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+A aplicação estará disponível em `http://localhost:3001`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Arquitetura
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Feature-First (Domain-Driven Design)
 
-## Deploy on Vercel
+```
+frontend/
+├── app/                    # App Router (Next.js 16)
+│   ├── (auth)/            # Rotas de autenticação
+│   │   ├── login/
+│   │   └── register/
+│   └── (shop)/            # Rotas da loja
+│       ├── cart/          # Carrinho
+│       ├── orders/        # Pedidos
+│       └── products/      # Produtos
+│
+├── features/              # Features organizadas por domínio
+│   ├── auth/
+│   │   ├── api/          # Chamadas API
+│   │   ├── schemas/      # Validação Zod
+│   │   ├── store/        # State Zustand
+│   │   └── types/        # TypeScript types
+│   ├── cart/
+│   │   ├── components/   # CartItem, CartSummary, CheckoutModal
+│   │   ├── api/
+│   │   ├── store/
+│   │   └── types/
+│   ├── orders/
+│   │   ├── components/   # OrderCard, OrderStatus
+│   │   ├── api/
+│   │   ├── schemas/
+│   │   └── types/
+│   └── products/
+│       ├── components/   # ProductCard, ProductGrid, ProductRating
+│       ├── api/
+│       └── types/
+│
+└── shared/
+    ├── components/
+    │   ├── ui/           # shadcn/ui components
+    │   └── layout/       # Header, Footer
+    └── lib/              # Utilitários (api-client, utils)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev       # Desenvolvimento
+npm run build     # Build produção
+npm run start     # Rodar produção
+npm run lint      # Lint código
+```
+
+## Variáveis de Ambiente
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+## Melhorias Sugeridas
+
+Este é um MVP. Oportunidades de melhoria:
+
+- [ ] Testes unitários e E2E
+- [ ] Galeria de imagens dos produtos
+- [ ] Filtros e ordenação de produtos
+- [ ] Sistema de favoritos/wishlist
+- [ ] Integração de pagamento real
+- [ ] Painel administrativo
+- [ ] Otimização de bundle
+- [ ] SSR/SSG para SEO
+- [ ] Acessibilidade (ARIA)
+- [ ] Dark mode
