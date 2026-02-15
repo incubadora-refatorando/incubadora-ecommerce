@@ -12,7 +12,7 @@ export default function NotFound() {
 					O produto que você está procurando não existe ou foi removido.
 				</p>
 				<Link href="/products">
-					<Button>Ver Todos os Produtos</Button>
+					<Button className="text-white">Ver Todos os Produtos</Button>
 				</Link>
 			</div>
 		</div>
