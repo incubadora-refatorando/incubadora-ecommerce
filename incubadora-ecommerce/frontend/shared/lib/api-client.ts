@@ -11,9 +11,17 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('auth_token');
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+      // Busca o token do Zustand persist (key: auth-storage)
+      const authStorage = localStorage.getItem('auth-storage');
+      if (authStorage) {
+        try {
+          const { state } = JSON.parse(authStorage);
+          if (state?.token) {
+            config.headers.Authorization = `Bearer ${state.token}`;
+          }
+        } catch (error) {
+          // Ignora erros de parsing
+        }
       }
     }
     return config;
@@ -30,7 +38,7 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401) {
       // Token inválido ou expirado - limpa e redireciona
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth-storage');
         window.location.href = '/login';
       }
     }

@@ -22,7 +22,7 @@ Aplicação web de e-commerce desenvolvida com Next.js 16, React 19 e TypeScript
 - ✅ Checkout com validação
 - ✅ Histórico de pedidos
 - ✅ Interface 100% em pt-BR
-- ✅ Middleware de proteção de rotas
+- ✅ Proteção de rotas autenticadas
 - ✅ Design responsivo
 
 ## Instalação
@@ -106,8 +106,10 @@ npm run lint      # Lint código
 ## Variáveis de Ambiente
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
 ```
+
+**Importante:** A URL deve incluir `/api` no final, pois o backend serve todas as rotas sob este prefixo.
 
 ## Melhorias Sugeridas
 

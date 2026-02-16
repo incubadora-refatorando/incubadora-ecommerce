@@ -15,7 +15,7 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       token: null,
       isAuthenticated: false,
@@ -27,8 +27,6 @@ export const useAuthStore = create<AuthState>()(
         });
 
         const { token, user } = response.data;
-
-        localStorage.setItem('auth_token', token);
         set({ user, token, isAuthenticated: true });
       },
 
@@ -40,18 +38,15 @@ export const useAuthStore = create<AuthState>()(
         });
 
         const { token, user } = response.data;
-
-        localStorage.setItem('auth_token', token);
         set({ user, token, isAuthenticated: true });
       },
 
       logout: () => {
-        localStorage.removeItem('auth_token');
         set({ user: null, token: null, isAuthenticated: false });
       },
 
       checkAuth: async () => {
-        const token = localStorage.getItem('auth_token');
+        const token = get().token;
         if (!token) {
           set({ user: null, token: null, isAuthenticated: false });
           return;
@@ -61,14 +56,12 @@ export const useAuthStore = create<AuthState>()(
           const response = await apiClient.get<User>('/auth/me');
           set({ user: response.data, token, isAuthenticated: true });
         } catch (error) {
-          localStorage.removeItem('auth_token');
           set({ user: null, token: null, isAuthenticated: false });
         }
       },
     }),
     {
       name: 'auth-storage',
-      partialize: (state) => ({ token: state.token }),
     }
   )
 );
