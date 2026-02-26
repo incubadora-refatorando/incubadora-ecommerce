@@ -1,11 +1,11 @@
-import pool from './database';
+import pool from "./database";
 
 const runMigrations = async () => {
-  try {
-    console.log('🔄 Running migrations...');
+	try {
+		console.log("🔄 Running migrations...");
 
-    // Create users table
-    await pool.query(`
+		// Create users table
+		await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
         email VARCHAR(255) UNIQUE NOT NULL,
@@ -17,13 +17,13 @@ const runMigrations = async () => {
       );
     `);
 
-    // Create index on email for faster lookups
-    await pool.query(`
+		// Create index on email for faster lookups
+		await pool.query(`
       CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
     `);
 
-    // Create products table
-    await pool.query(`
+		// Create products table
+		await pool.query(`
       CREATE TABLE IF NOT EXISTS products (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
@@ -36,13 +36,29 @@ const runMigrations = async () => {
       );
     `);
 
-    // Create index on product name for search
-    await pool.query(`
+		// Create index on product name for search
+		await pool.query(`
       CREATE INDEX IF NOT EXISTS idx_products_name ON products(name);
     `);
 
-    // Create orders table
-    await pool.query(`
+		// Create cart_items table
+		await pool.query(`
+      CREATE TABLE IF NOT EXISTS cart_items (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        product_id INTEGER NOT NULL REFERENCES products(id),
+        quantity INTEGER NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+		// Create index on cart_items for faster lookups
+		await pool.query(`
+      CREATE INDEX IF NOT EXISTS idx_cart_items_user_id ON cart_items(user_id);
+    `);
+
+		// Create orders table
+		await pool.query(`
       CREATE TABLE IF NOT EXISTS orders (
         id SERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL REFERENCES users(id),
@@ -56,8 +72,8 @@ const runMigrations = async () => {
       );
     `);
 
-    // Create order_items table
-    await pool.query(`
+		// Create order_items table
+		await pool.query(`
       CREATE TABLE IF NOT EXISTS order_items (
         id SERIAL PRIMARY KEY,
         order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
@@ -68,17 +84,17 @@ const runMigrations = async () => {
       );
     `);
 
-    // Create index on orders user_id
-    await pool.query(`
+		// Create index on orders user_id
+		await pool.query(`
       CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
     `);
 
-    console.log('✅ Migrations completed successfully');
-    process.exit(0);
-  } catch (error) {
-    console.error('❌ Migration error:', error);
-    process.exit(1);
-  }
+		console.log("✅ Migrations completed successfully");
+		process.exit(0);
+	} catch (error) {
+		console.error("❌ Migration error:", error);
+		process.exit(1);
+	}
 };
 
 runMigrations();
