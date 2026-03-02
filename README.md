@@ -33,6 +33,7 @@ Imagine que você quer abrir uma loja online. Você precisa de:
 ```
 
 É assim! Tipo pedir uma pizza por telefone:
+
 - **Você** = Frontend (o cliente)
 - **Pizzaria** = Backend (o servidor)
 - **Ligação** = Requisição HTTP
@@ -201,6 +202,7 @@ O carrinho fica **guardado no computador da pessoa**, não no servidor (por enqu
 ### Como produt é armazenado:
 
 Cada produto tem:
+
 - **Nome** - O que é o produto
 - **Descrição** - Mais detalhes sobre o produto
 - **Preço** - Quanto custa
@@ -224,6 +226,7 @@ Cada produto tem:
 **Autenticação** = Verificar se você é quem você diz ser.
 
 É tipo:
+
 - Você entra em um servidor
 - O servidor verifica sua identidade
 - Se estiver certo, você consegue fazer coisas
@@ -245,16 +248,16 @@ O token é **único** para cada pessoa e **expira com o tempo** (tipo um bilhete
 
 ## 🗂️ Tecnologias - Mas de forma fácil
 
-| Coisa | O que faz | Tipo |
-|-------|----------|------|
-| **Express** | Define rotas (URLs) | Backend |
-| **PostgreSQL** | Banco de dados (guarda tudo) | Banco |
-| **Next.js** | Framework para fazer sites | Frontend |
-| **React** | Tecnologia para criar componentes | Frontend |
-| **TypeScript** | JavaScript com tipos (evita erros) | Linguagem |
-| **Zustand** | Guarda dados que vários componentes usam | Frontend |
-| **JWT** | Cria tokens de autenticação | Segurança |
-| **Bcrypt** | Criptografa senhas | Segurança |
+| Coisa          | O que faz                                | Tipo      |
+| -------------- | ---------------------------------------- | --------- |
+| **Express**    | Define rotas (URLs)                      | Backend   |
+| **PostgreSQL** | Banco de dados (guarda tudo)             | Banco     |
+| **Next.js**    | Framework para fazer sites               | Frontend  |
+| **React**      | Tecnologia para criar componentes        | Frontend  |
+| **TypeScript** | JavaScript com tipos (evita erros)       | Linguagem |
+| **Zustand**    | Guarda dados que vários componentes usam | Frontend  |
+| **JWT**        | Cria tokens de autenticação              | Segurança |
+| **Bcrypt**     | Criptografa senhas                       | Segurança |
 
 ---
 
@@ -329,23 +332,23 @@ PÁGINA DE PEDIDOS
 
 ### Backend
 
-| Arquivo | O que faz |
-|---------|-----------|
-| `server.ts` | Inicia tudo |
-| `routes/` | Define URLs do projeto |
-| `controllers/` | Executa a lógica |
-| `models/` | Conversa com o banco |
+| Arquivo              | O que faz              |
+| -------------------- | ---------------------- |
+| `server.ts`          | Inicia tudo            |
+| `routes/`            | Define URLs do projeto |
+| `controllers/`       | Executa a lógica       |
+| `models/`            | Conversa com o banco   |
 | `config/database.ts` | Conecta com PostgreSQL |
 
 ### Frontend
 
-| Arquivo | O que faz |
-|---------|-----------|
-| `app/layout.tsx` | Estrutura da página |
-| `app/(auth)/login/page.tsx` | Página de login |
-| `app/(shop)/products/page.tsx` | Página de produtos |
-| `features/` | Lógica de cada funcionalidade |
-| `shared/store/` | Dados compartilhados |
+| Arquivo                        | O que faz                     |
+| ------------------------------ | ----------------------------- |
+| `app/layout.tsx`               | Estrutura da página           |
+| `app/(auth)/login/page.tsx`    | Página de login               |
+| `app/(shop)/products/page.tsx` | Página de produtos            |
+| `features/`                    | Lógica de cada funcionalidade |
+| `shared/store/`                | Dados compartilhados          |
 
 ---
 
@@ -366,17 +369,20 @@ PÁGINA DE PEDIDOS
 ## 🎓 Próximos passos para aprender
 
 ### Fácil:
+
 1. Faça login no site
 2. Adicione algo ao carrinho
 3. Finalize uma compra
 4. Veja seu pedido em "Meus Pedidos"
 
 ### Medium:
+
 1. Abra o banco de dados (PostgreSQL) e veja as tabelas
 2. Use Insomnia para testar as rotas do backend
 3. Abra DevTools (F12) e veja as requisições que o frontend faz
 
 ### Difícil:
+
 1. Adicione um novo campo a um produto (ex: cor ou tamanho)
 2. Modifique um controller para validar dados diferente
 3. Crie uma nova rota no backend

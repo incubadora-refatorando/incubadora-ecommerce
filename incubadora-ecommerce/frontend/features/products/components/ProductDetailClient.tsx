@@ -26,7 +26,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
 		try {
 			await addItem(product.id, quantity);
 			toast.success("Adicionado ao carrinho!");
-		} catch (error) {
+		} catch {
 			toast.error("Erro ao adicionar ao carrinho");
 		} finally {
 			setIsAddingToCart(false);
@@ -83,7 +83,10 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
 							<h1 className="text-3xl font-bold text-gray-dark mb-2">
 								{product.name}
 							</h1>
-							<ProductRating rating={4.5} count={121} />
+							<ProductRating
+								rating={4.5}
+								count={121}
+							/>
 						</div>
 
 						<div className="border-t border-b border-border py-4">
@@ -94,9 +97,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
 
 						{product.description && (
 							<div>
-								<h3 className="font-semibold text-gray-dark mb-2">
-									Descrição
-								</h3>
+								<h3 className="font-semibold text-gray-dark mb-2">Descrição</h3>
 								<p className="text-gray-medium">{product.description}</p>
 							</div>
 						)}
@@ -112,7 +113,7 @@ export function ProductDetailClient({ product }: ProductDetailClientProps) {
 										disabled={quantity <= 1}>
 										<Minus className="w-4 h-4" />
 									</Button>
-									<span className="px-6 py-2 text-sm font-medium border-x border-border min-w-[3rem] text-center">
+									<span className="px-6 py-2 text-sm font-medium border-x border-border min-w-12 text-center">
 										{quantity}
 									</span>
 									<Button

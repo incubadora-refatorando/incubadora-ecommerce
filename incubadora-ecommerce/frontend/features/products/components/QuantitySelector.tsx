@@ -40,7 +40,7 @@ export function QuantitySelector({
         <Minus className="w-4 h-4" />
       </Button>
 
-      <div className="px-6 py-2 text-sm font-medium border-x border-border min-w-[3rem] text-center">
+      <div className="px-6 py-2 text-sm font-medium border-x border-border min-w-12 text-center">
         {quantity}
       </div>
 
